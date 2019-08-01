@@ -1,0 +1,38 @@
+easyblock = 'ConfigureMake'
+
+name = 'OpenMPI'
+version = '4.0.1'
+versionsuffix = '-hpcx'
+
+homepage = 'https://www.open-mpi.org/'
+description = """Mellanox flavored Open MPI Project is an open source MPI-3 implementation."""
+
+toolchain = {'name': 'GCC', 'version': '8.2.0-2.31.1'}
+
+source_urls = ['https://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['e55e213fe09a214ab9f2c722acfd8bf7b39bbc1800e4b7a464d38df15e707f59']
+
+# needed for --with-verbs
+osdependencies = [('libibverbs-dev', 'libibverbs-devel', 'rdma-core-devel')]
+
+dependencies = [
+    ('zlib', '1.2.11'),
+#    ('UCX', '1.6.0', '-hpcx')
+]
+
+configopts = '--with-libevent=internal --enable-mpi1-compatibility '
+configopts += '--with-slurm --with-platform=contrib/platform/mellanox/optimized '
+#configopts += '--with-ucx=$EBROOTUCX --with-hcoll=/opt/mellanox/hcoll '
+configopts += '--with-ucx=/usr --with-hcoll=/opt/mellanox/hcoll '
+configopts += '--with-mxm=/opt/mellanox/mxm '
+
+libs = ["mpi_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
+sanity_check_paths = {
+    'files': ["bin/%s" % binfile for binfile in ["ompi_info", "opal_wrapper", "orterun"]] +
+             ["lib/lib%s.%s" % (libfile, SHLIB_EXT) for libfile in libs] +
+             ["include/%s.h" % x for x in ["mpi-ext", "mpif-config", "mpif", "mpi", "mpi_portable_platform"]],
+    'dirs': [],
+}
+
+moduleclass = 'mpi'
