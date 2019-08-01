@@ -1,0 +1,27 @@
+easyblock = 'Toolchain'
+
+name = 'foss'
+version = '2019a'
+versionsuffix = '-AzureHB'
+
+homepage = 'https://easybuild.readthedocs.io/en/master/Common-toolchains.html#foss-toolchain'
+description = """GNU Compiler Collection (GCC) based compiler toolchain, including
+ OpenMPI for MPI support, OpenBLAS (BLAS and LAPACK support), FFTW and ScaLAPACK."""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+# toolchain used to build foss dependencies
+comp_mpi_tc_name = 'gompi'
+comp_mpi_tc = (comp_mpi_tc_name, '2019a-hpcx')
+
+# we need GCC and OpenMPI as explicit dependencies instead of gompi toolchain
+# because of toolchain preparation functions
+dependencies = [
+    ('GCC', '8.2.0-2.31.1'),
+    ('OpenMPI', '4.0.1-GCC-8.2.0-2.31.1-hpcx'),
+    ('OpenBLAS', '0.3.5-gompi-2019a-hpcx-AzureHB'),
+    ('FFTW', '3.3.8-gompi-2019a-hpcx-AzureHB'),
+    ('ScaLAPACK', '2.0.2-gompi-2019a-hpcx-OpenBLAS-0.3.5-AzureHB'),
+]
+
+moduleclass = 'toolchain'
