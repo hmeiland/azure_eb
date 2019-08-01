@@ -18,12 +18,10 @@ osdependencies = [('libibverbs-dev', 'libibverbs-devel', 'rdma-core-devel')]
 
 dependencies = [
     ('zlib', '1.2.11'),
-#    ('UCX', '1.6.0', '-hpcx')
 ]
 
 configopts = '--with-libevent=internal --enable-mpi1-compatibility '
 configopts += '--with-slurm --with-platform=contrib/platform/mellanox/optimized '
-#configopts += '--with-ucx=$EBROOTUCX --with-hcoll=/opt/mellanox/hcoll '
 configopts += '--with-ucx=/usr --with-hcoll=/opt/mellanox/hcoll '
 configopts += '--with-mxm=/opt/mellanox/mxm '
 
