@@ -20,3 +20,11 @@ export MODULEPATH=/apps/modules/all:$MODULEPATH
 
 for convinience you can put the export in your .bashrc file.
 
+To install the compiler toolchain of GCC and OpenMPI (Mellanox optimised including ucx, hcoll and mxm)
+
+```
+sudo yum install gompi-2019a-hpcx
+```
+
+
+
