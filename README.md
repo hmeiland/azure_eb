@@ -25,5 +25,7 @@ and with the AzureHB (AMD Epyc Naples) optimised OpenBLAS, FFTW and ScaLAPACK:
 ```
 sudo yum install foss-2019a-AzureHB
 ```
-
-
+Or go directly for a optimized application (for now just HPL :) )
+```
+sudo yum install HPL-2.3-foss-2019a-AzureHB
+```
